@@ -1,0 +1,288 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family:'Inter',sans-serif,system-ui;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wrapper {
+  overflow: visible;
+  max-width: 1280px;
+  margin: 20px auto;
+  background: #FFF
+  ul {
+    margin: 0;
+    padding: 0;
+    }
+    li { 
+      list-style-type: none;
+    }
+    
+}
+
+header {
+  ul {
+    padding-inline-start: 0px;
+  }
+//box-shadow:   0 4px 2px 0px #0003;
+background: #FFF;
+//border-bottom: 1px solid rgb(155, 150, 150);
+position: sticky;
+top:0;
+display:flex;
+justify-content: space-between;
+.headerRight {
+  display: flex;
+  align-items: center;
+  .user {
+    margin-right:25px; 
+  }
+  svg {
+    width: 28px;
+    height: 28px;
+    fill: rgb(119, 116, 116);
+  }
+
+}
+
+.search-block {
+  display: flex;
+  flex:20%;
+  align-items: center;
+  border: 1px solid #f2f2f2;
+  margin: 14px 15px 13px ;
+ 
+  input {
+  flex: 90%;
+  border: 0;
+  padding: 10px;
+  }
+
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  .humBurger {
+    margin-right: 25px;
+    /* margin-left: 25px; */
+    
+    
+    
+  }
+  
+}
+
+}
+
+      
+.content {
+  padding-bottom: 40px;
+  h1 {
+    font-weight: 300;
+    margin:0;
+    font-size: 24px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: rgb(75, 192, 39);
+  }
+   .productGrid {
+    display:flex;
+    flex-wrap:wrap ;
+    
+  
+  .card {
+    border: 1px solid #F8F8F8;
+    //box-shadow: 0 0 10px rgba(179, 160, 160, 0);
+    width: 199px;
+    padding: 20px;
+    border-radius:5px;
+    transition: .3s;
+    //margin-right:15px;
+    cursor:pointer;
+    &:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .favourite {
+      cursor: pointer;
+    }
+    .PrCard {
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      .button {
+        background:#FFFF;
+        border: 0px solid #f2f2f2;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+      }
+      .price {     
+    font-size: 20px;
+    font-weight: 400;
+    color: #555;
+        
+      }
+
+    }
+
+
+    
+   }
+ }
+}
+
+.breadcrumb {
+  color: #636363;
+  padding: 12px 0;
+  margin-bottom: 12px;
+  -webkit-box-shadow: inset 0 60px 60px -60px #60bd10;
+  -moz-box-shadow: inset 0 60px 60px -60px #60BD10;
+  box-shadow: inset 0 60px 60px -60px #60bd10;
+}
+.overlay{
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+}
+.drawer {
+  position: absolute;
+  width: 420px;
+  right:0;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin:0;
+    font-size: 24px;
+    margin-bottom: 30px;
+    img {
+      cursor: pointer;
+     opacity: 0.4;
+     margin-right: 10px;
+     &:hover{
+      opacity: 1;
+     }
+    
+      
+    }
+    
+    
+  }
+  
+  .items {
+    flex:1;
+    overflow: auto;
+    .cartItem {
+      display: flex;
+      align-items: center;
+      border: 1px solid #f3f3f3;
+      overflow: hidden;
+      margin-bottom: 20px;
+      
+    p{ 
+      font-size: 12px;
+    }
+    b{
+      font-size: 14px;
+    }
+    img {
+     cursor: pointer;
+    }
+    .removeProduct {
+      
+    }
+    .namePrice{
+      margin-right: 30px;
+    }
+    }
+  }
+  
+  .cartTotalBlock {
+  
+      ul{
+        margin-bottom: 40px;
+        padding-inline-start: 5px;
+        li {
+          display: flex;
+          align-items: flex-end;
+          margin-bottom:20px;
+  
+          div {
+            flex:1;
+            border: 1px dashed #dfdfdf;
+            height: 1px;
+            position: relative;
+            top:-4px;
+            margin: 0 7px;
+          }
+        }
+      
+      
+      }
+     .greenButton {
+      position: relative;
+      &:hover {
+        img {
+      transform: translateX(5px);
+        }
+      }
+      
+      img {
+        position: absolute;
+        right:30px;
+        top:17px;
+        transition: transform 0.15s ease-in-out;
+       } 
+     }
+   
+  }
+  .greenButton {
+    width: 100%;
+    height:55px;
+    background: #9dd558;
+    border-radius: 3px;
+    border:0;
+    color:#FFF;
+    font-size: 16px;
+    font-weight: 500;
+    
+    &:hover {
+      background: lighten(#9dd558, 10%) ;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+
+    }
+    &:active {
+      background: darken(#9dd558, 10%) ;  
+    }  
+    
+    img {
+      right:30px;
+      top:20px;
+      position: absolute;
+    }
+
+   }
+}
