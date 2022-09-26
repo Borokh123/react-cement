@@ -1,32 +1,65 @@
+import React from 'react';
 import Card from './components/Card';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 
-const arr = [
-  {title:'Цемент HEIDELBERGCEMENT-400 25кг:', price:'225', imgUrl:'/img/cement/2.png'},
-  {title:'Цемент HEIDELBERGCEMENT-500 25кг:', price:'275', imgUrl:'/img/cement/3.png'},
-  {title:'Цемент HEIDELBERGCEMENT-400 25кг:', price:'250', imgUrl:'/img/cement/4.png'}
-];
+
 
 
 function App() {
+  const [items, setItems] = React.useState([]);
+  const [searchValue, setSearchValue] = React.useState('');
+  const [cartItems, setCartItems] = React.useState([]);
+  const [cartOpened, setCartOpened] = React.useState(false);
+  React.useEffect(()=>{fetch('https://632bfb445568d3cad879213d.mockapi.io/items')
+  .then((res) => {
+  return res.json()})
+  .then((json) => {
+   setItems(json);
+  });
+},[])
+
+const onAddToCart = (obj) => {
+  setCartItems((prev) => [...prev, obj]);
+  console.log(obj);
+
+};
+
+
+
+
+
+ 
+
+
+
   return (
   <div className="wrapper">
     
-    <Drawer/>
+    {cartOpened && <Drawer items = {cartItems} onClose = {() => setCartOpened(false)}/>}
    
-    <Header/>
+    <Header onClickCart = {() => setCartOpened(true)}
+    onChangeSearch = {(event) => setSearchValue(event.target.value)}
+    searchHeaderValue = {searchValue}
+    setSpace = {() => setSearchValue('')}
+
+
+    />
       <div className="breadcrumb"></div>
       <div className="content">
-        <h1>Цемент</h1>
+        <h1>{searchValue ? `Поиск по запросу: "${searchValue}"`:'Все кроссовки'}</h1>
       <div className="productGrid">
         
-        {arr.map((obj) => (
+        {items.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase())).map((item, index) => (
         <Card 
-        title = {obj.title}
-        imgUrl = {obj.imgUrl}
-        price = {obj.price}
-        onClick = {() => alert(obj.title)}
+        key={index}
+        title = {item.title}
+        imgUrl = {item.imgUrl}
+        price = {item.price}
+        onAddfavourite  = {() => console.log('Добавили в избранное')}
+        onAddCart = {(obj) => onAddToCart(obj)}
+        
+
         />))}
        
         

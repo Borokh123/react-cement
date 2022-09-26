@@ -27,56 +27,59 @@ header {
   ul {
     padding-inline-start: 0px;
   }
-//box-shadow:   0 4px 2px 0px #0003;
-background: #FFF;
-//border-bottom: 1px solid rgb(155, 150, 150);
-position: sticky;
-top:0;
-display:flex;
-justify-content: space-between;
-.headerRight {
-  display: flex;
-  align-items: center;
-  .user {
-    margin-right:25px; 
-  }
-  svg {
-    width: 28px;
-    height: 28px;
-    fill: rgb(119, 116, 116);
+    //box-shadow:   0 4px 2px 0px #0003;
+  background: #FFF;
+  //border-bottom: 1px solid rgb(155, 150, 150);
+  position: sticky;
+  top:0;
+  display:flex;
+  justify-content: space-between;
+    .headerRight {
+    display: flex;
+    align-items: center;
+      .user {
+        margin-right:25px; 
+      }
+      svg {
+        width: 28px;
+        height: 28px;
+        fill: rgb(119, 116, 116);
+        cursor: pointer;
+      }
+
   }
 
-}
-
-.search-block {
-  display: flex;
-  flex:20%;
-  align-items: center;
-  border: 1px solid #f2f2f2;
-  margin: 14px 15px 13px ;
+  .search-block {
+    display: flex;
+    flex:20%;
+    align-items: center;
+    border: 1px solid #f2f2f2;
+    margin: 14px 15px 13px ;
  
-  input {
-  flex: 90%;
-  border: 0;
-  padding: 10px;
+      input {
+      flex: 90%;
+      border: 0;
+      padding: 10px;
+      }
+
   }
 
-}
-
-.headerLeft {
-  display: flex;
-  align-items: center;
-  .humBurger {
-    margin-right: 25px;
-    /* margin-left: 25px; */
+  .headerLeft {
+    display: flex;
+    align-items: center;
+    .humBurger {
+      margin-right: 25px;
+      /* margin-left: 25px; */
     
-    
+    }
+    img {
+      cursor:pointer;
+      margin-right:20px;
+    }
     
   }
-  
-}
 
-}
+  }
 
       
 .content {
@@ -107,7 +110,7 @@ justify-content: space-between;
   -moz-box-shadow: inset 0 60px 60px -60px #60BD10;
   box-shadow: inset 0 60px 60px -60px #60bd10;
 }
-.overlay{
+.overlay {
   position: absolute;
   left: 0;
   top: 0;
@@ -138,10 +141,11 @@ justify-content: space-between;
     margin-bottom: 30px;
     img {
       cursor: pointer;
-     opacity: 0.4;
+     opacity: 0.6;
      margin-right: 10px;
+     
      &:hover{
-      opacity: 1;
+      opacity: 0.5;
      }
     
       
