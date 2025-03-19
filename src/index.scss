@@ -38,7 +38,11 @@ header {
     display: flex;
     align-items: center;
       .user {
-        margin-right:25px; 
+        margin-right:18px; 
+      }
+
+      .bookmark {
+        margin-right:18px; 
       }
       svg {
         width: 28px;
@@ -55,28 +59,40 @@ header {
     align-items: center;
     border: 1px solid #f2f2f2;
     margin: 14px 15px 13px ;
+    position:relative;
  
       input {
       flex: 90%;
       border: 0;
       padding: 10px;
       }
-
+      .clear {
+        height: 18px;
+        width: 18px;
+        display: inline-block;
+        position: absolute;
+        right: 13px;
+      }
   }
 
   .headerLeft {
     display: flex;
     align-items: center;
     .humBurger {
-      margin-right: 25px;
-      /* margin-left: 25px; */
+      margin-right: 18px;
+      /* margin-left: 18px; */
     
     }
     img {
       cursor:pointer;
       margin-right:20px;
+      padding:7px;
     }
     
+    img:hover {
+    background: #E0E0E0;
+    border-radius: 2px;
+    }
   }
 
   }
@@ -130,6 +146,7 @@ header {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   h2 {
     display: flex;
@@ -156,7 +173,7 @@ header {
   
   .items {
     flex:1;
-    overflow: auto;
+    overflow:auto ;
     .cartItem {
       display: flex;
       align-items: center;
@@ -179,8 +196,25 @@ header {
     }
     }
   }
+
+  .cartImg {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+
+    
+      img {
+        height: 100px;
+        width: 100px;
+      }
+    
+    
+    
+  }
   
   .cartTotalBlock {
+    //margin-top:auto;
   
       ul{
         margin-bottom: 40px;
@@ -202,7 +236,7 @@ header {
       
       
       }
-     .greenButton {
+     .totalBtn {
       position: relative;
       &:hover {
         img {
@@ -216,9 +250,12 @@ header {
         top:17px;
         transition: transform 0.15s ease-in-out;
        } 
+     
+     
      }
-   
+
   }
+
   .greenButton {
     width: 100%;
     height:55px;
@@ -241,9 +278,9 @@ header {
     
     img {
       right:30px;
-      top:20px;
+      top:16px;
       position: absolute;
     }
-
-   }
+    }
+  
 }
