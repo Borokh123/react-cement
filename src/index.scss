@@ -209,6 +209,10 @@ header {
         width: 100px;
       }
     
+      p{
+        opacity: 50%;
+        text-align: center;
+      }
     
     
   }
@@ -283,4 +287,15 @@ header {
     }
     }
   
+}
+.orderId {
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  align-items: center;
+
+  p {
+    opacity: 68%;
+    font-size: 12px;
+  }
 }
