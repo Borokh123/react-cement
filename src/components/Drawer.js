@@ -1,66 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Info from './../components/Info'
-import axios from 'axios';
 import { Usercart } from '../hooks/Usercart';
-import { AppContext } from '../App';
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-function Drawer({ onRemove, onClose, items = [] }) {
-  const { setSavedOrders, savedOrders } = useContext(AppContext);
-//   const updateOrders = () => {
-//     const orders = JSON.parse(localStorage.getItem('orders')) || [];
-//     setSavedOrders(orders);
-// };
+//const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+function Drawer({ onRemove, onClose, items = [], isOrderComplete, orderId, onAddOrder, isloading }) {
 
+  const { totalPrice } = Usercart();
 
-  const [isOrderComplete, setisOrderComplete] = React.useState(false);
-  const [orderId, setOrderId] = React.useState(null);
-  const [isloading, setIsloading] = React.useState(false);
-  const { cartItems, setCartItems, totalPrice } = Usercart();
-  const onClickOrder = async () => {
-    try {
-      setIsloading(true);
+const  onClickOrder = () => {
 
-
-      // Получить текущие сохраненные заказы из localStorage
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
-
-      // Добавить текущие элементы корзины в заказы
-      // Создать новый заказ с уникальным номером
-      const newOrder = {
-        id: `ORD-${Date.now() % 10000}`, // Уникальный идентификатор заказа
-        date: new Date().toISOString(),
-        items: cartItems
-      };
-
-      // Добавить новый заказ в массив с использованием оператора spread
-      const updatedOrders = [...orders, newOrder];
-
-      // Сохранить обновленный список заказов обратно в localStorage
-      localStorage.setItem('orders', JSON.stringify(updatedOrders));
-      const obj = JSON.parse(localStorage.getItem('orders')) || [];
-      setSavedOrders(obj); // Обновляем savedOrders
-
-      // Установить номер заказа
-      // setOrderId(newOrder.id);
-
-      setisOrderComplete(true);
-      setCartItems([]);
-      for (let i = 0; i < cartItems.length; i++) {
-        const item = cartItems[i];
-        await axios.delete('https://632bfb445568d3cad879213d.mockapi.io/cart/' + item.id)
-        await delay(1000);
-
-      }
-    } catch (error) {
-      alert('ну удалось создать заказ :(')
-    } finally {
-      setIsloading(false);
-    };
-    const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
-    // console.log(savedOrders);
-
-
-  }
+   onAddOrder();
+}
   return (
     <div className="overlay">
       <div className="drawer">

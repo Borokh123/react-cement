@@ -3,7 +3,7 @@ import ContentLoader from "react-content-loader"
 import styles from './Card.module.scss'
 import {AppContext} from "../../App";
 
-function Card({ id, title, price, imgUrl, onAddCart, onFavourite, loading = false }) {
+function Card({ productId, title, price, imgUrl, onAddCart, onFavourite, loading = false }) {
   ///console.log(added);
   /// console.log(favorited);
    const {isItemAdded, isFavAdded} = useContext(AppContext);
@@ -24,14 +24,15 @@ function Card({ id, title, price, imgUrl, onAddCart, onFavourite, loading = fals
 
   const onHandleClick = () => {
     //console.log({ id, title, price, imgUrl })
-    onAddCart({ id, title, price, imgUrl });
+    onAddCart({ productId, title, price, imgUrl });
     // setIsAdded(!isAdded);
   }
 
 
   const onAddFavourite = () => {
+    console.log({ productId, title, price, imgUrl })
     //console.log({ id, title, price, imgUrl })
-    onFavourite({ id, title, price, imgUrl });
+    onFavourite({ productId, title, price, imgUrl });
     // setIsFavourite(!isFavourite);
     // console.log(favorited);
   }
@@ -61,7 +62,7 @@ function Card({ id, title, price, imgUrl, onAddCart, onFavourite, loading = fals
           <>
             <div className={styles.favourite}>
               {/* <img className={styles.svgImg} src={isFavourite ? "img/heart-checked.svg" : "img/heart.svg"} alt="bookmark" onClick={onAddFavourite} /> */}
-              {onFavourite && <img className={styles.svgImg} src={isFavAdded(id) ? "img/heart-checked.svg" : "img/heart.svg"} alt="bookmark" onClick={onAddFavourite} />}
+              {onFavourite && <img className={styles.svgImg} src={isFavAdded(productId) ? "img/heart-checked.svg" : "img/heart.svg"} alt="bookmark" onClick={onAddFavourite} />}
 
             </div>
             <img width={150} height={150} src={imgUrl} alt="" />
@@ -72,7 +73,7 @@ function Card({ id, title, price, imgUrl, onAddCart, onFavourite, loading = fals
               </div>
               {/* <img className={styles.svgImg} src={isAdded ? "img/addToCartCh.svg" : "img/addToCart.svg"} alt="Add to Cart" onClick={onHandleClick} /> */}
 
-              {onAddCart && <img className={styles.svgImg} src= {isItemAdded(id) ? "img/addToCartCh.svg" : "img/addToCart.svg"} alt="Add to Cart" onClick={onHandleClick} />}
+              {onAddCart && <img className={styles.svgImg} src= {isItemAdded(productId) ? "img/addToCartCh.svg" : "img/addToCart.svg"} alt="Add to Cart" onClick={onHandleClick} />}
               
 
 

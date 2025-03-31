@@ -17,6 +17,8 @@ function App() {
   const [savedOrders, setSavedOrders] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [isOrderComplete, setisOrderComplete] = React.useState(false);
+  const [orderId, setOrderId] = React.useState(null);
 
 //   React.useEffect(() => {
 //     async function fetchOrders() {
@@ -37,12 +39,13 @@ function App() {
       // setCartItems(res.data);
       // });
 
-      const favouritesResponse = await axios.get('https://632bfb445568d3cad879213d.mockapi.io/favourites');
+      const favouritesResponse = await axios.get('https://632bfb445568d3cad879213d.mockapi.io/favourites'); // все данные дождуться друг друга и только потом сохраняться в стейт
+      //  .then((res) => {                                                                                  // данные возьми как угодно в любом порядке, но сохраняй ифнормацию в стейт в следующем порядке
       // .then((res) => {
       // setFavourites(res.data);
       // });
 
-      const itemResponse = await axios.get('https://632bfb445568d3cad879213d.mockapi.io/items');
+      const itemResponse = await axios.get('https://632bfb445568d3cad879213d.mockapi.io/items');   // и только тогда мы сможем кооррекнто оттобрадать что какой то товар был добавлен в корзину
       //  .then((res) => {
       //     setItems(res.data);
       //   });
@@ -51,7 +54,7 @@ function App() {
       const orders =  await JSON.parse(localStorage.getItem('orders')) || [];
       setIsLoading(false);
       setCartItems(cartResponse.data);
-      setFavourites(favouritesResponse.data);
+      setFavourites(favouritesResponse.data);                             //стейт
       setItems(itemResponse.data);
       setSavedOrders(orders);
 
@@ -74,15 +77,12 @@ function App() {
     //console.log(obj)
     try {
 
-      const existingItem = (cartItems.find((item) => Number(item.productId) === Number(obj.id)))
+      const existingItem = (cartItems.find((item) => Number(item.productId) === Number(obj.productId)))
       if (existingItem) {
         await axios.delete(`https://632bfb445568d3cad879213d.mockapi.io/cart/${existingItem.id}`);
-        setCartItems((prev) => prev.filter(item => Number(item.productId) !== Number(obj.id)));
+        setCartItems((prev) => prev.filter(item => Number(item.productId) !== Number(obj.productId)));
       } else {
-        const { data } = await axios.post('https://632bfb445568d3cad879213d.mockapi.io/cart', {
-          ...obj,
-          productId: obj.id // Добавляем productId
-        });
+        const { data } = await axios.post('https://632bfb445568d3cad879213d.mockapi.io/cart', obj);
         setCartItems((prev) => [...prev, data]);
       }
     } catch (error) {
@@ -95,16 +95,13 @@ function App() {
 
     try {
 
-      const existingItem = (favourites.find((item) => Number(item.productId) === Number(obj.id)));
+      const existingItem = (favourites.find((item) => Number(item.productId) === Number(obj.productId)));
 
       if (existingItem) {
         await axios.delete(`https://632bfb445568d3cad879213d.mockapi.io/favourites/${existingItem.id}`);
-        setFavourites((prev) => prev.filter(item => Number(item.productId) !== Number(obj.id)));
+        setFavourites((prev) => prev.filter(item => Number(item.productId) !== Number(obj.productId)));
       } else {
-        const { data } = await axios.post('https://632bfb445568d3cad879213d.mockapi.io/favourites', {
-          ...obj,
-          productId: obj.id // Добавляем productId
-        });
+        const { data } = await axios.post('https://632bfb445568d3cad879213d.mockapi.io/favourites', obj)
         setFavourites((prev) => [...prev, data]);
       }
     } catch (error) {
@@ -123,22 +120,70 @@ function App() {
   };
 
 
-  const isItemAdded = (id) => {
+  const isItemAdded = (productId) => {
 
-    return cartItems.some((obj) => Number(obj.productId) === Number(id));
+    return cartItems.some((obj) => Number(obj.productId) === Number(productId));
     //cartItems.some((obj) => Number(obj.id) === Number(id));
   }
-  const isFavAdded = (id) => {
+  const isFavAdded = (productId) => {
 
-    return favourites.some((obj) => Number(obj.productId) === Number(id));
+    return favourites.some((obj) => Number(obj.productId) === Number(productId));
     //cartItems.some((obj) => Number(obj.id) === Number(id));
   }
+
+  const onAddOrder = async () => {
+    try {
+          // Получить текущие сохраненные заказы из localStorage
+     // const orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+      // Добавить текущие элементы корзины в заказы
+      // Создать новый заказ с уникальным номером
+      const newOrder = {
+        id: `ORD-${Date.now() % 10000}`, // Уникальный идентификатор заказа
+        date: new Date().toISOString(),
+        items: cartItems
+      };
+
+      // Добавить новый заказ в массив с использованием оператора spread
+      const updatedOrders = [...savedOrders, newOrder];
+
+      // Сохранить обновленный список заказов обратно в localStorage
+      localStorage.setItem('savedOrders', JSON.stringify(updatedOrders));
+      const obj = JSON.parse(localStorage.getItem('savedOrders')) || [];
+      setSavedOrders(obj); // Обновляем savedOrders
+
+      // Установить номер заказа
+      setOrderId(newOrder.id);
+
+      setisOrderComplete(true);
+      setCartItems([]);
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+        await axios.delete('https://632bfb445568d3cad879213d.mockapi.io/cart/' + item.id)
+        // await delay(1000);
+
+      }
+    } catch (error) {
+      alert('ну удалось создать заказ :(')
+    } finally {
+  
+    };
+  //   const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+  //  console.log(savedOrders);
+
+
+  }
+
+
 
   return (
     <AppContext.Provider value={{ items, cartItems, favourites, savedOrders, setSavedOrders, isItemAdded, isFavAdded, setCartItems }}>
       <div className="wrapper">
 
         {cartOpened && <Drawer items={cartItems}
+        isLoading={isLoading}
+         onAddOrder={onAddOrder}
+         isOrderComplete = {isOrderComplete} orderId = {orderId}
           onClose={() => setCartOpened(false)}
           onRemove={onRemoveItem} />}
 
@@ -165,7 +210,7 @@ function App() {
 
           <Route path="/favorites" exact element={<Favorites favourites={favourites} onAddToFavourites={onAddToFavourites} isLoading={isLoading} />}>
           </Route>
-          <Route path="/orders" exact element={<Orders isLoading={isLoading} />}>
+          <Route path="/orders" exact element={<Orders />}>
           </Route>
         </Routes>
 
