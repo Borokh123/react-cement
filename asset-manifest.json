@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-cement/git/static/css/main.0ea39c25.css",
+    "main.js": "/react-cement/git/static/js/main.d4a66671.js",
+    "index.html": "/react-cement/git/index.html",
+    "main.0ea39c25.css.map": "/react-cement/git/static/css/main.0ea39c25.css.map",
+    "main.d4a66671.js.map": "/react-cement/git/static/js/main.d4a66671.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0ea39c25.css",
+    "static/js/main.d4a66671.js"
+  ]
+}
