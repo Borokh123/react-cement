@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-cement/static/css/main.0ea39c25.css",
-    "main.js": "/react-cement/static/js/main.498e7d81.js",
+    "main.js": "/react-cement/static/js/main.7d7eb123.js",
     "index.html": "/react-cement/index.html",
     "main.0ea39c25.css.map": "/react-cement/static/css/main.0ea39c25.css.map",
-    "main.498e7d81.js.map": "/react-cement/static/js/main.498e7d81.js.map"
+    "main.7d7eb123.js.map": "/react-cement/static/js/main.7d7eb123.js.map"
   },
   "entrypoints": [
     "static/css/main.0ea39c25.css",
-    "static/js/main.498e7d81.js"
+    "static/js/main.7d7eb123.js"
   ]
 }
