@@ -18,7 +18,7 @@ function Orders({isLoading}) {
             {savedOrders.map(order => (
                 <div key={order.id} className="order">
                     <div className="orderId">
-                        <h4>Заказ: #{order.id}</h4>
+                        <h4>Заказ: #{order.orderId}</h4>
                         <p>Дата и время: {new Date(order.date).toLocaleString()}</p>
                     </div>
 

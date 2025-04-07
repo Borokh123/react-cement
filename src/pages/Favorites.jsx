@@ -2,11 +2,14 @@ import React from 'react';
 import Card from "../components/Card/Card";
 
 function Favorites({onAddToFavourites, favourites, isLoading}) {
-  
+    const isfavouritesEmpty = favourites.length === 0
     //console.log(state)
     return (
         <div className="content">
-            <h1>Мои закладки</h1>
+            {isfavouritesEmpty 
+            ? <h1>В закладках нет товаров...</h1> 
+            : <h1>Мои закладки</h1>}
+                  
             <div className="productGrid">
                 {(isLoading ? [...Array(10)] : favourites).map((item, index) => (
                     <Card

@@ -4,9 +4,10 @@ import styles from './Card.module.scss'
 import {AppContext} from "../../App";
 
 function Card({ productId, title, price, imgUrl, onAddCart, onFavourite, loading = false }) {
+  const {isItemAdded, isFavAdded} = useContext(AppContext);
   ///console.log(added);
   /// console.log(favorited);
-   const {isItemAdded, isFavAdded} = useContext(AppContext);
+  
   // const [isAdded, setIsAdded] = React.useState(added);
   // const [isFavourite, setIsFavourite] = React.useState(favorited);
 // console.log(title, isItemAdded(id))

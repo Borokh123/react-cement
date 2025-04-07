@@ -36,7 +36,7 @@ function Home({ cartItems, searchValue, items, onAddToFavourites, onAddToCart, i
     };
     return (
         <div className="content">
-            <h1>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}</h1>
+            <h1>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Весь цемент'}</h1>
             <div className="productGrid">
                 {renderItems()}
 
